@@ -58,13 +58,16 @@ export class ClaimService {
     let params = new HttpParams();
     
     if (criteria.status && criteria.status.length > 0) {
-      params = params.set('status', criteria.status.join(','));
+      const statusVal = Array.isArray(criteria.status) ? criteria.status.join(',') : criteria.status;
+      params = params.set('status', statusVal);
     }
     if (criteria.dolStart) {
-      params = params.set('dolStart', criteria.dolStart);
+      const start = criteria.dolStart.includes('T') ? criteria.dolStart : `${criteria.dolStart}T00:00:00`;
+      params = params.set('dolStart', start);
     }
     if (criteria.dolEnd) {
-      params = params.set('dolEnd', criteria.dolEnd);
+      const end = criteria.dolEnd.includes('T') ? criteria.dolEnd : `${criteria.dolEnd}T23:59:59`;
+      params = params.set('dolEnd', end);
     }
     if (criteria.minAmount) {
       params = params.set('minAmount', criteria.minAmount);
@@ -91,13 +94,16 @@ export class ClaimService {
     let params = new HttpParams();
     
     if (criteria.status && criteria.status.length > 0) {
-      params = params.set('status', criteria.status.join(','));
+      const statusVal = Array.isArray(criteria.status) ? criteria.status.join(',') : criteria.status;
+      params = params.set('status', statusVal);
     }
     if (criteria.dolStart) {
-      params = params.set('dolStart', criteria.dolStart);
+      const start = criteria.dolStart.includes('T') ? criteria.dolStart : `${criteria.dolStart}T00:00:00`;
+      params = params.set('dolStart', start);
     }
     if (criteria.dolEnd) {
-      params = params.set('dolEnd', criteria.dolEnd);
+      const end = criteria.dolEnd.includes('T') ? criteria.dolEnd : `${criteria.dolEnd}T23:59:59`;
+      params = params.set('dolEnd', end);
     }
     if (criteria.minAmount) {
       params = params.set('minAmount', criteria.minAmount);

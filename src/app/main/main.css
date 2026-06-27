@@ -1,78 +1,54 @@
 * {
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body {
-    margin: 0;
-    padding: 20px;
-    background-color: #f4f5f7; /* Matches the light gray background */
-    font-size: 12px;
-    color: #333;
-}
-
-.container {
-    width: 100%;
+.search-form-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 20px; 
-    background-color: #fafafa;
-    padding: 20px;
-    border-bottom: 2px solid #5a768c; 
+    /* Responsive auto-flowing grid */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px 20px;
+    background-color: #ffffff;
+    padding: 24px;
+    border-bottom: 2px solid #5a768c;
 }
 
-.form-group, 
-.form-group1 {
+.form-group {
     display: flex;
-    align-items: center;
-    margin-bottom: 12px;
+    flex-direction: column;
+    justify-content: flex-end; /* Align inputs to the bottom if labels are different heights */
 }
 
-.form-group label, 
-.form-group1 label {
-    flex: 0 0 35%; 
-    text-align: right;
-    margin-right: 10px;
-    font-weight: bold;
-    color: #555;
-    font-size: 11px;
-    white-space: normal;
-}
-
-/* Secondary labels in the same row */
-.form-group label:nth-of-type(2) {
-    flex: 0 0 auto;
-    margin-left: 10px;
+.form-group label {
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 12px;
 }
 
 .form-group input, 
-.form-group select,
-.form-group1 input, 
-.form-group1 select {
-    flex: 1; 
-    min-width: 0; /* Prevents flex items from overflowing their container */
-    padding: 4px 6px;
-    border: 1px solid #ccc;
-    border-radius: 2px;
-    height: 24px;
-    font-size: 12px;
+.form-group select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #cbd5e0;
+    border-radius: 4px;
+    font-size: 13px;
     background-color: #fff;
-    color: #333;
+    color: #2d3748;
+    transition: all 0.2s ease-in-out;
+    height: 36px;
 }
 
-input:focus, 
-select:focus {
+.form-group input:focus, 
+.form-group select:focus {
     outline: none;
-    border-color: #66afe9;
-    box-shadow: 0 0 3px rgba(102, 175, 233, 0.6);
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
 }
 
-/* Handle double inputs like FirstName/LastName */
-.container4 .form-group:first-child input {
-    margin-right: 5px;
-}
-.container4 .form-group:first-child input:last-child {
-    margin-right: 0;
+.form-group .multi-select {
+    height: 70px; /* Give multiple select some room */
+    padding: 4px;
 }
 
 /* Typeahead styles */
@@ -80,26 +56,37 @@ select:focus {
     position: relative;
 }
 
+.input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
 .typeahead-dropdown {
     position: absolute;
-    top: 100%;
-    left: calc(35% + 10px); /* 35% label width + 10px margin */
-    width: calc(65% - 10px);
-    max-height: 150px;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    max-height: 200px;
     overflow-y: auto;
     background: white;
-    border: 1px solid #ccc;
-    border-radius: 2px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
     z-index: 1000;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .typeahead-item {
-    padding: 6px 10px;
+    padding: 8px 12px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 13px;
+    border-bottom: 1px solid #f7fafc;
+}
+
+.typeahead-item:last-child {
+    border-bottom: none;
 }
 
 .typeahead-item:hover {
-    background-color: #f0f0f0;
+    background-color: #ebf8ff;
+    color: #2b6cb0;
 }

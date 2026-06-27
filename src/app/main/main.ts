@@ -27,7 +27,7 @@ export class Main implements OnInit {
   constructor(private fb: FormBuilder, private claimService: ClaimService) {
     this.searchForm = this.fb.group({
       // API Params
-      status: [[]],
+      status: [''],
       dolStart: [''],
       dolEnd: [''],
       minAmount: [''],
@@ -55,7 +55,9 @@ export class Main implements OnInit {
       adjustingOffice: ['']
     });
     
-    // Sync form to service whenever fields change so footer can just use it
+    // Sync form to service initially and whenever fields change
+    this.claimService.currentSearchCriteria.set(this.searchForm.value);
+    
     this.searchForm.valueChanges.subscribe(val => {
        this.claimService.currentSearchCriteria.set(val);
     });
