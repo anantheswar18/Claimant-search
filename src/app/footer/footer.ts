@@ -1,11 +1,11 @@
 import { Component, computed } from '@angular/core';
 import { ClaimService } from '../services/claim.service';
-import { DatePipe, CurrencyPipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [DatePipe, CurrencyPipe],
+  imports: [DatePipe],
   templateUrl: './footer.html',
   styleUrl: './footer.css',
 })
