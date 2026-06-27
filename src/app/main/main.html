@@ -119,22 +119,7 @@
         </select>
     </div>
 
-    <!-- Underwriter Typeahead -->
-    <div class="form-group position-relative">
-        <label>Underwriter:</label>
-        <div class="input-wrapper">
-            <input type="text" placeholder="Search Underwriter" formControlName="underwriter">
-            @if (showUnderwriterDropdown()) {
-                <div class="typeahead-dropdown">
-                    @for (uw of underwriterResults(); track uw.underwriter_id) {
-                        <div class="typeahead-item" (click)="selectUnderwriter(uw)">
-                            {{ uw.underwriter_name }}
-                        </div>
-                    }
-                </div>
-            }
-        </div>
-    </div>
+
     
     <div class="form-group">
         <label>Adjusting Office:</label>

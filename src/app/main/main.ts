@@ -19,10 +19,8 @@ export class Main implements OnInit {
   
   // Typeahead Results
   employerResults = signal<Employer[]>([]);
-  underwriterResults = signal<Underwriter[]>([]);
   
   showEmployerDropdown = signal(false);
-  showUnderwriterDropdown = signal(false);
 
   constructor(private fb: FormBuilder, private claimService: ClaimService) {
     this.searchForm = this.fb.group({
@@ -51,7 +49,6 @@ export class Main implements OnInit {
       employeeNumber: [''],
       afiliateClaimNumber: [''],
       claimantType: [''],
-      underwriter: [''], // Mapped to Broker Name
       adjustingOffice: ['']
     });
     
@@ -89,38 +86,10 @@ export class Main implements OnInit {
         this.showEmployerDropdown.set(false);
       }
     });
-
-    // Underwriter Typeahead
-    this.searchForm.get('underwriter')?.valueChanges.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      switchMap(query => {
-        if (!query || typeof query !== 'string') {
-          this.underwriterResults.set([]);
-          this.showUnderwriterDropdown.set(false);
-          return of([]);
-        }
-        return this.claimService.searchUnderwriters(query).pipe(
-          catchError(() => of([]))
-        );
-      })
-    ).subscribe(results => {
-      if (results.length > 0) {
-        this.underwriterResults.set(results);
-        this.showUnderwriterDropdown.set(true);
-      } else {
-        this.showUnderwriterDropdown.set(false);
-      }
-    });
   }
 
   selectEmployer(emp: Employer) {
     this.searchForm.patchValue({ employer: emp.insured }, { emitEvent: false });
     this.showEmployerDropdown.set(false);
-  }
-
-  selectUnderwriter(uw: Underwriter) {
-    this.searchForm.patchValue({ underwriter: uw.underwriter_name }, { emitEvent: false });
-    this.showUnderwriterDropdown.set(false);
   }
 }
