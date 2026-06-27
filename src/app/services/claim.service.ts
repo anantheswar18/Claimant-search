@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 export interface Claim {
   id: number;
   claimNumber: string;
-  claimStatusCode: number;
+  status: string;
   incidentDate: string;
   stateCode: string;
   totalPayoutOnIncident: number;
@@ -112,11 +112,20 @@ export class ClaimService {
       params = params.set('maxAmount', criteria.maxAmount);
     }
 
-    // Use window.location or create an invisible link to trigger download natively
-    // A simple approach since it's a GET request:
-    const queryString = params.toString();
-    const url = `${this.baseUrl}/claims/export${queryString ? '?' + queryString : ''}`;
-    window.open(url, '_blank');
+    // Download via Angular HttpClient as requested in API specs
+    this.http.get(`${this.baseUrl}/claims/export`, { params, responseType: 'blob' }).subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'claims_export.csv';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      },
+      error: (err) => console.error('Export failed', err)
+    });
   }
 
   // 3. Static Dropdown: Insurance Types

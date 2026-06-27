@@ -17,6 +17,7 @@
           <th>Status</th>
           <th>Incident Date</th>
           <th>Type</th>
+          <th>Total Payout</th>
           <th>Broker Name</th>
           <th>Insured</th>
         </tr>
@@ -25,7 +26,7 @@
       <tbody>
         @if (claims().length === 0) {
             <tr>
-            <td colspan="11" class="empty-row">
+            <td colspan="12" class="empty-row">
                 No Records Found
             </td>
             </tr>
@@ -38,9 +39,10 @@
                     <td>{{ claim.stateCode }}</td>
                     <td>-</td>
                     <td>-</td>
-                    <td>{{ claim.claimStatusCode }}</td>
+                    <td>{{ claim.status }}</td>
                     <td>{{ claim.incidentDate | date:'shortDate' }}</td>
                     <td>-</td>
+                    <td>{{ claim.totalPayoutOnIncident | currency }}</td>
                     <td>-</td>
                     <td>-</td>
                 </tr>
