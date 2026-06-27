@@ -1,0 +1,133 @@
+<form [formGroup]="searchForm" class="container">
+    <div class="container1">
+        <div class="Search-form">
+            <div class="form-group1">
+                <label >Claim Number:</label>
+                <input type="text" formControlName="claimNumber">
+            </div>
+            <div class="form-group1">
+                <label >Examiner:</label>
+                <input type="text" placeholder="Search" formControlName="examiner">
+            </div>
+            <div class="form-group1">
+                <label >Insurance Type:</label>
+                <select formControlName="insuranceType">
+                    <option value="">Select</option>
+                    @for (type of insuranceTypes(); track type.insuranceType) {
+                        <option [value]="type.insuranceType">{{ type.insuranceTypeDesc }}</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group1">
+                <label >Email Id:</label>
+                <input type="email" formControlName="emailId">
+            </div>
+        </div>
+    </div>
+    <div class="container2">
+        <div class="form-group">
+            <label >From Incedent Date:</label>
+            <input type="date" formControlName="dolStart">
+            <label >To Incedent Date</label>
+            <input type="date" formControlName="dolEnd">
+        </div>
+         <div class="form-group position-relative">
+            <label >Employer:</label>
+            <input type="text" placeholder="Search" formControlName="employer">
+            @if (showEmployerDropdown()) {
+                <div class="typeahead-dropdown">
+                    @for (emp of employerResults(); track emp.insured_id) {
+                        <div class="typeahead-item" (click)="selectEmployer(emp)">
+                            {{ emp.insured }}
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+        <div class="form-group">
+            <label >Organizer2:</label>
+            <select formControlName="organizer2">
+                <option value="">search</option>
+                <option value="abc">abc</option>
+                <option value="bcd">bcd</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Phone Number:</label>
+            <input type="text" placeholder="search" formControlName="phoneNumber">
+        </div>
+    </div>
+    <div class="container3">
+        <div class="form-group">
+            <label >Quick Search:</label>
+            <select formControlName="quickSearch">
+                <option value="">search</option>
+                <option value="bvf">bvf</option>
+                <option value="bcf">bcf</option>
+                <option value="igf">igf</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="abhi1">SSN</label>
+            <input type="text" placeholder="xxx-xx-xxx" formControlName="ssn">
+            <label>Status</label>
+            <select formControlName="status" multiple>
+                @for (s of statuses(); track s.statusCode) {
+                    <option [value]="s.statusCode">{{ s.statusDesc }}</option>
+                }
+            </select>
+        </div>
+         <div class="form-group">
+            <label>Program:</label>
+            <input type="text" placeholder="search" formControlName="program">
+        </div>
+        <div class="form-group">
+            <label>Jurisdiction Claim Number:</label>
+            <input type="text" placeholder="search" formControlName="jurisdictionClaimNumber">
+        </div>
+        <div class="form-group">
+            <label>DOB</label>
+            <input type="date" formControlName="dob">
+        </div>
+    </div>
+    <div class="container4">    
+        <div class="form-group">
+            <label >Claimant Name:</label>
+            <input type="text" placeholder="first" formControlName="claimantFirstName">
+            <input type="text" placeholder="last" formControlName="claimantLastName">
+        </div>
+        <div class="form-group">
+            <label >Employee Number:</label>
+            <input type="text" placeholder="search" formControlName="employeeNumber">
+            <label >Afiliate Claim Number:</label>
+            <input type="text" placeholder="search" formControlName="afiliateClaimNumber">
+        </div>
+        <div class="form-group">
+            <label>Claimant Type:</label>
+            <select formControlName="claimantType">
+                <option value="">select</option>
+                <option value="abbg">abbg</option>
+            </select>
+        </div>
+        <div class="form-group position-relative">
+            <label>Underwriter:</label>
+            <input type="text" placeholder="Search Underwriter" formControlName="underwriter">
+            @if (showUnderwriterDropdown()) {
+                <div class="typeahead-dropdown">
+                    @for (uw of underwriterResults(); track uw.underwriter_id) {
+                        <div class="typeahead-item" (click)="selectUnderwriter(uw)">
+                            {{ uw.underwriter_name }}
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+        <div class="form-group">
+            <label >Adjusting Office</label>
+            <select formControlName="adjustingOffice">
+                <option value="">search</option>
+                <option value="eghh">eghh</option>
+            </select>
+        </div>
+    </div>
+</form>

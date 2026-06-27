@@ -1,0 +1,52 @@
+<div class="box">
+    <div class="box1">
+        <button (click)="onSearch()">Search</button>
+        <button (click)="onReset()">Reset</button>
+        <button (click)="onDownload()">Dowload</button>
+    </div>
+    <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Claim</th>
+          <th>Claim ID</th>
+          <th>Adj Office</th>
+          <th>Claimant</th>
+          <th>SSN</th>
+          <th>Status</th>
+          <th>Incident Date</th>
+          <th>Type</th>
+          <th>Broker Name</th>
+          <th>Insured</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @if (claims().length === 0) {
+            <tr>
+            <td colspan="11" class="empty-row">
+                No Records Found
+            </td>
+            </tr>
+        } @else {
+            @for (claim of claims(); track claim.id) {
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>{{ claim.claimNumber }}</td>
+                    <td>{{ claim.id }}</td>
+                    <td>{{ claim.stateCode }}</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>{{ claim.claimStatusCode }}</td>
+                    <td>{{ claim.incidentDate | date:'shortDate' }}</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            }
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

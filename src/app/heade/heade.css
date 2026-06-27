@@ -1,0 +1,24 @@
+.topbar {
+  display: flex;
+  background: #5c7790;
+  padding: 5px;
+  gap: 4px;
+}
+
+.menu-item {
+  background: #6f879d;
+  /* padding: 8px 14px; */
+  border-radius: 2px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.menu-item.active {
+  background: #4d657a;
+} 
+.b1 :hover{
+    width: 100px;
+    height: 40px;
+    background-color: #6f879d;
+    color: rgb(230, 47, 47);
+}
